@@ -21,25 +21,29 @@ app.get("/",(req,res) =>{
     res.send("hi,I am root");
 });
 
-  app.get("/listings", async (req,res) => {
-    const allListings = Listing.find({});
-    res.render("listings/index.ejs" , {allListings});
-  });
 
-// app.get("/testListing",async (req,res) => {
-//     let sampleListing = new Listing({
-//         title:"My New Villa",
-//         description: "By the beach",
-//         price: 1200 ,
-//         location: "calangute,Goa",
-//         country: " India",
-//     });
+app.get("/listings", async (req, res) => {
+    const allListings = await Listing.find({});
+    
+    console.log(allListings); 
+    
+    res.render("listings/index", { allListings });
+});
 
-//     await sampleListing.save();
-//     console.log("sample was saved");
-//     res.send("successful testing");
+app.get("/testListing",async (req,res) => {
+    let sampleListing = new Listing({
+        title:"My New Villa",
+        description: "By the beach",
+        price: 1200 ,
+        location: "calangute,Goa",
+        country: " India",
+    });
 
-// });
+    await sampleListing.save();
+    console.log("sample was saved");
+    res.send("successful testing");
+
+});
 
 app.listen(8080,() => {
     console.log("server is lsiting to port 8080")

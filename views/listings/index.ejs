@@ -9,9 +9,19 @@
 <body>
     <h3>All Listings</h3>
     <ul>
-        <% for(let listing of allListings) { %>
-            <li><a href="/listings/<%= listing._id %>"> <%= listing.title %> </a></li>
+        <ul>
+            <% if(Array.isArray(allListings) && allListings.length > 0){ %>
+                <% allListings.forEach(listing => { %>
+                    <li>
+                        <a href="/listings/<%= listing._id %>">
+                            <%= listing.title %>
+                        </a>
+                    </li>
+                <% }) %>
+            <% } else { %>
+                <p>No listings found</p>
             <% } %>
+        </ul>
     </ul>
 </body>
 </html>
